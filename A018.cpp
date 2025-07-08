@@ -25,11 +25,82 @@ int main(){
         cin >> B[i];
     }
 
-    //확인용 코드
+    //A로 min_index 꾸리기
+    int min;
+    int* min_idx = (int*)malloc(sizeof(int)*num);
+    int min_idx_temp;
     for(int i=0; i<num; i++){
-        cout << "A[" << i << "]: " << A[i] << endl;
-        cout << "B[" << i << "]: " << B[i] << endl;
+        min = 101;
+        for(int j=0; j<num; j++){
+            bool already_selected = false;
+            if(A[j] < min){
+                for(int k=0; k<i; k++){
+                    if(j == min_idx[k]){
+                        already_selected = true;
+                        break;
+                    }
+                }
+
+                if(already_selected) continue;
+
+                min = A[j];
+                min_idx_temp = j;
+            }
+        }
+        min_idx[i] = min_idx_temp;
     }
+
+    //B로 min_index 꾸리기
+    int max;
+    int* max_idx = (int*)malloc(sizeof(int)*num);
+    int max_idx_temp;
+    for(int i=0; i<num; i++){
+        max = -1;
+        for(int j=0; j<num; j++){
+            bool already_selected = false;
+            if(B[j] > max){
+                for(int k=0; k<i; k++){
+                    if(j == max_idx[k]){
+                        already_selected = true;
+                        break;
+                    }
+                }
+
+                if(already_selected) continue;
+
+                max = B[j];
+                max_idx_temp = j;
+            }
+        }
+        max_idx[i] = max_idx_temp;
+    }
+
+    //A 재배열
+    int* relocate_A = (int*)malloc(sizeof(int) * num);
+    for(int i=0; i<num; i++){
+        relocate_A[max_idx[i]] = A[min_idx[i]]; 
+    }
+
+    //확인용 코드
+    // for(int i=0; i<num; i++){
+    //     cout << "min_idx[" << i << "] : "  << min_idx[i] << endl;
+    // }
+
+    // for(int i=0; i<num; i++){
+    //     cout << "relocate_A[" << i << "] : "  << relocate_A[i] << endl;
+    // }
+
+    // for(int i=0; i<num; i++){
+    //     cout << "max_idx[" << i << "] : "  << max_idx[i] << endl;
+    // }
+
+    //result 출력
+    int result = 0;
+    for(int i=0; i<num; i++){
+        result = result + relocate_A[i] * B[i];
+    }
+
+    cout << result << endl;
 
     return 0;
 }
