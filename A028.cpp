@@ -26,6 +26,9 @@ int main(){
         carry = ret / 10;
     }
 
+    //if(carry) cout << carry;
+
+
     for(int i=time-1; i>=0; i--){
         cout << result[i];
     }
