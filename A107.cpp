@@ -17,5 +17,6 @@ int main(){
 		ans+=arr[i];
 	}
 	cout<<ans;
+
+    return 0;
 }
-[출처] 백준1292 쉽게 푸는 문제 풀이 C/C++|작성자 승원
