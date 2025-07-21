@@ -14,8 +14,7 @@ int main() {
         for(int i = 1; i < k; i++){
             ret = ret * 2 + 1;
         }
-        cout << ret << " : " <<  (int)pow(2, k) - 1 << "\n";
+        cout << ret << "\n";
     }
     return 0;
 }
-
